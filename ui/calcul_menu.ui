@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>584</width>
+    <height>539</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>584</width>
+    <height>487</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>584</width>
+    <height>1000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Раскрой тентового полотна</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralwidget{
+     background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.00568182 rgba(63, 140, 237, 255), stop:1 rgba(164, 221, 255, 255));
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>70</y>
+      <width>91</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    border: 1px solid gray;
+    border-radius: 10px;
+    font: 75 14pt &quot;Times New Roman&quot;;
+	color: black;
+}
+QComboBox QAbstractItemView {
+    border: 3px solid darkgray;
+    selection-background-color:qlineargradient(spread:pad, x1:0.886, y1:0.0625, x2:1, y2:0, stop:0.869318 rgba(0, 124, 255, 237), stop:1 rgba(255, 255, 255, 255));
+	color: black;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+	color: black;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+	color: black;
+}
+
+QComboBox::down-arrow {
+    image:url(:/arrow/dop/arrow.png);
+	height: 18;
+	width: 18;
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox:editable {
+    background: white;
+	color: black;
+	}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+}
+
+/* QComboBox gets the &quot;on&quot; state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+QComboBox QAbstractItemView::item:hover {
+    color: black;
+    background-color: lightgreen;   /*  The whole drop-down window crosss the background color of each item */
+}
+
+/*  After dropping, the entire drop-down window is selected for each pattern. */
+QComboBox QAbstractItemView::item:selected {
+   	color: black;
+    background-color: lightgreen;
+}
+QComboBox:hover {
+    background:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(209, 248, 255, 255), stop:1 rgba(234, 255, 255, 255));
+	color: black;
+}</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>ТП-1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ТП-2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ТП-3</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>20</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Раскрой по ТП</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="secondlayout_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>260</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox{
+font: bold 14pt &quot;Times New Roman&quot;;
+color:rgb(235, 235, 235);
+}
+QCheckBox::indicator {
+    border: 3px solid #5A5A5A;
+}
+QCheckBox::indicator:unchecked:pressed
+{
+background-color : green;
+}
+QCheckBox::indicator:checked {
+    image: url(:/other/dop/dialog_ok_apply_icon.png);
+	height: 12;
+	width: 12;
+	 border:1px solid #5A5A5A;
+	background-color : white;
+}
+QCheckBox::checked{
+color:rgb(189, 255, 178);
+}</string>
+    </property>
+    <property name="text">
+     <string>Второй слой</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="pocket_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>312</x>
+      <y>340</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox{
+font: bold 14pt &quot;Times New Roman&quot;;
+color:rgb(235, 235, 235);
+}
+QCheckBox::indicator {
+    border: 3px solid #5A5A5A;
+}
+QCheckBox::indicator:unchecked:pressed
+{
+background-color : green;
+}
+QCheckBox::indicator:checked {
+    image: url(:/other/dop/dialog_ok_apply_icon.png);
+	height: 12;
+	width: 12;
+	border:1px solid #5A5A5A;
+	background-color : white;
+}
+QCheckBox::checked{
+color:rgb(189, 255, 178);
+}</string>
+    </property>
+    <property name="text">
+     <string>Карман монтажный</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tp_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>400</y>
+      <width>211</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.75, y1:0.204545, x2:1, y2:0, stop:0 rgba(36, 140, 255, 255), stop:1 rgba(106, 232, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 12pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 171, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+    </property>
+    <property name="text">
+     <string>Рассчитать ТП</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>490</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image:url(:/logo/logo/35th Parallel-logos1.png);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../images/main_image.qrc">:/logo/logo/35th Parallel-logos1.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_develop">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>490</y>
+      <width>541</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Develop by Metliaev Ivan</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>42</x>
+      <y>70</y>
+      <width>201</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../images/main_image.qrc">:/logo/logo/tentlogo1.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>271</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold italic 12pt &quot;MS Sans Serif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>ООО &quot;Тентовые Конструкции&quot;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>271</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold italic 16pt &quot;MS Sans Serif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Раскрой тентового полотна в AutoCAD </string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>314</x>
+      <y>70</y>
+      <width>141</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: bold 14pt &quot;Times New Roman&quot;;
+color: rgb(235, 235, 235);</string>
+    </property>
+    <property name="text">
+     <string>Отправ. марка:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="canselButton">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>450</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.823864, y1:0.693, x2:1, y2:1, stop:0 rgba(19, 43, 255, 255), stop:1 rgba(113, 149, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:reflect, x1:0, y1:0.261, x2:0.989, y2:0, stop:0.267045 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 18pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+    </property>
+    <property name="text">
+     <string>Выход</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_tp_1">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>100</y>
+      <width>241</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>234</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="width_doubleSpinBox_2">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>100000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Длина:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="length_doubleSpinBox_2">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Кол-во ТП- .1:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Ширина:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="quantity_spinBox">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Раскрой по:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="count_doubleSpinBox_2">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="quantity_spinBox_tp2">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Кол-во ТП- .2:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_tp_3">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>100</y>
+      <width>271</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>254</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Ширина Торца:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="width_doubleSpinBox_4">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>100000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_20">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Высота стенки:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="wall_haight_doubleSpinBox_2">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_22">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Высота полная:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QDoubleSpinBox" name="full_height_doubleSpinBox_3">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_23">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Размер нащельника:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="batten_2g_height_doubleSpinBox_3">
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_sl">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>290</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>241</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_3">
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="size_to_sl_doubleSpinBox">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>100000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Шаг между стойками:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="step_bw_sl_doubleSpinBox">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="maximum">
+         <double>1000000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Отступ от колонны:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <zorder>comboBox</zorder>
+   <zorder>label_4</zorder>
+   <zorder>secondlayout_checkBox</zorder>
+   <zorder>pocket_checkBox</zorder>
+   <zorder>tp_pushButton</zorder>
+   <zorder>label_develop</zorder>
+   <zorder>logo</zorder>
+   <zorder>label_11</zorder>
+   <zorder>label_12</zorder>
+   <zorder>label_13</zorder>
+   <zorder>label_14</zorder>
+   <zorder>canselButton</zorder>
+   <zorder>frame_tp_1</zorder>
+   <zorder>frame_tp_3</zorder>
+   <zorder>frame_sl</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../images/main_image.qrc"/>
+  <include location="../../pythonProject1/AutoCAD script/AutoCAD script/images/main_image.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>canselButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

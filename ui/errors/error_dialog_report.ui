@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>erorr_wind</class>
+ <widget class="QDialog" name="erorr_wind">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>355</width>
+    <height>169</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>355</width>
+    <height>169</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>355</width>
+    <height>169</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>ОШИБКА</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/error/dop/error.png</normaloff>:/error/dop/error.png</iconset>
+  </property>
+  <widget class="QPushButton" name="ok_btn">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>120</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.75, y1:0.204545, x2:1, y2:0, stop:0 rgba(36, 140, 255, 255), stop:1 rgba(106, 232, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 10pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 171, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 12pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_main">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>351</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 16pt &quot;Times New Roman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>ОШИБКА!</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dscr_of_error">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>331</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 14pt &quot;Times New Roman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Что-то пошло не так, попробуйте снова!</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>5</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="../../images/main_image.qrc">:/other/dop/error.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../../images/images_store.qrc"/>
+  <include location="../../images/main_image.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>ok_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>erorr_wind</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>177</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
