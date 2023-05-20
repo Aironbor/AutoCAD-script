@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>558</width>
+    <height>473</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>558</width>
+    <height>473</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>558</width>
+    <height>473</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Расчет Тентового Полотна</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralwidget{
+     background:qlineargradient(spread:pad, x1:0.077, y1:0.113773, x2:1, y2:1, stop:0.522727 rgba(66, 110, 187, 248), stop:1 rgba(30, 34, 187, 255));
+
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label_develop">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>541</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Develop by Metliaev Ivan</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>400</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image:url(:/logo/logo/35th Parallel-logos1.png);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../images/main_image.qrc">:/logo/logo/35th Parallel-logos1.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>42</x>
+      <y>70</y>
+      <width>201</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../images/main_image.qrc">:/logo/logo/tentlogo1.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>271</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold italic 16pt &quot;MS Sans Serif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Расчет Тентового Полотна</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>271</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold italic 12pt &quot;MS Sans Serif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>ООО &quot;Тентовые Конструкции&quot;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="autocad_btn">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>110</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.75, y1:0.204545, x2:1, y2:0, stop:0 rgba(36, 140, 255, 255), stop:1 rgba(106, 232, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 12pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 171, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+    </property>
+    <property name="text">
+     <string>Раскрой ТП</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="calc_area_btn">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>180</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.75, y1:0.204545, x2:1, y2:0, stop:0 rgba(36, 140, 255, 255), stop:1 rgba(106, 232, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 12pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 171, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+    </property>
+    <property name="text">
+     <string>Расчет площади Ангара</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="canselButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>280</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.823864, y1:0.693, x2:1, y2:1, stop:0 rgba(19, 43, 255, 255), stop:1 rgba(113, 149, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:reflect, x1:0, y1:0.261, x2:0.989, y2:0, stop:0.267045 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 18pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+    </property>
+    <property name="text">
+     <string>Выход</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>40</y>
+      <width>211</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold italic 16pt &quot;MS Sans Serif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Главное меню</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../images/main_image.qrc"/>
+  <include location="C:/Program Files (x86)/images/main_image.qrc"/>
+ </resources>
+ <connections/>
+</ui>

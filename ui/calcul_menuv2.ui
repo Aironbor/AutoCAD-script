@@ -1,0 +1,2064 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>580</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>624</width>
+    <height>580</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Раскрой Тентового полотна</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralwidget{
+     background:qlineargradient(spread:pad, x1:0.077, y1:0.113773, x2:1, y2:1, stop:0.522727 rgba(66, 110, 187, 248), stop:1 rgba(30, 34, 187, 255));
+
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QWidget" name="widget_3" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>495</width>
+        <height>445</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>487</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>290</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <property name="labelAlignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="minimumSize">
+             <size>
+              <width>251</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Sans Serif</family>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 bold italic 12pt &quot;MS Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>ООО &quot;Тентовые Конструкции&quot;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="minimumSize">
+             <size>
+              <width>251</width>
+              <height>261</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>251</width>
+              <height>261</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>18</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../../Prodaction-record-program/images/images_store.qrc">:/logo/logo/tentlogo1.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="minimumSize">
+             <size>
+              <width>241</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Sans Serif</family>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 bold italic 12pt &quot;MS Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Раскрой тентового полотна в AutoCAD </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>361</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>12</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>170</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>170</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>18</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Раскрой по ТП</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_4" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="horizontalSpacing">
+              <number>0</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBox">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+    border: 1px solid gray;
+    border-radius: 10px;
+    font: 75 14pt &quot;Times New Roman&quot;;
+	color: black;
+}
+QComboBox QAbstractItemView {
+    border: 3px solid darkgray;
+    selection-background-color:qlineargradient(spread:pad, x1:0.886, y1:0.0625, x2:1, y2:0, stop:0.869318 rgba(0, 124, 255, 237), stop:1 rgba(255, 255, 255, 255));
+	color: black;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+	color: black;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+	color: black;
+}
+
+QComboBox::down-arrow {
+    image:url(:/arrow/dop/arrow.png);
+	height: 18;
+	width: 18;
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox:editable {
+    background: white;
+	color: black;
+	}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+}
+
+/* QComboBox gets the &quot;on&quot; state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+QComboBox QAbstractItemView::item:hover {
+    color: black;
+    background-color: lightgreen;   /*  The whole drop-down window crosss the background color of each item */
+}
+
+/*  After dropping, the entire drop-down window is selected for each pattern. */
+QComboBox QAbstractItemView::item:selected {
+   	color: black;
+    background-color: lightgreen;
+}
+QComboBox:hover {
+    background:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(209, 248, 255, 255), stop:1 rgba(234, 255, 255, 255));
+	color: black;
+}</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>ТП-1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ТП-2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ТП-3</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: bold 14pt &quot;Times New Roman&quot;;
+color: rgb(235, 235, 235);</string>
+               </property>
+               <property name="text">
+                <string>Отправ. марка:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="tp_1_widget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>281</width>
+              <height>161</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_4">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Ширина:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="width_doubleSpinBox_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Длина:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="length_doubleSpinBox_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Кол-во ТП- .1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="quantity_spinBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_10">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Кол-во ТП- .2:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="quantity_spinBox_tp2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="tp_3_widget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>281</width>
+              <height>191</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_5">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Ширина Торца:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="width_doubleSpinBox_4">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="wall_haight_doubleSpinBox_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_20">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Высота стенки:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="full_height_doubleSpinBox_3">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Конек</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_22">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>3</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Высота полная:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="batten_2g_height_doubleSpinBox_3">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Ширина нижнего нащельника</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Размер нащельника:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Кол-во ТП- 3:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="quantity_spinBox_tp_3">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_raskroy" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>271</width>
+              <height>48</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_6">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Раскрой по:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="count_doubleSpinBox_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Ширина рулона ПВХ</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="secondlayout_checkBox">
+            <property name="font">
+             <font>
+              <family>Times New Roman</family>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QCheckBox{
+font: bold 14pt &quot;Times New Roman&quot;;
+color:rgb(235, 235, 235);
+}
+QCheckBox::indicator {
+    border: 3px solid #5A5A5A;
+}
+QCheckBox::indicator:unchecked:pressed
+{
+background-color : green;
+}
+QCheckBox::indicator:checked {
+    image: url(:/other/dop/dialog_ok_apply_icon.png);
+	height: 12;
+	width: 12;
+	 border:1px solid #5A5A5A;
+	background-color : white;
+}
+QCheckBox::checked{
+color:rgb(189, 255, 178);
+}</string>
+            </property>
+            <property name="text">
+             <string>Второй слой</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="dop_infa_for_sl_tp3_widget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>271</width>
+              <height>81</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>81</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:rgb(255, 145, 10);</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_7">
+             <item row="0" column="1">
+              <widget class="QDoubleSpinBox" name="size_to_sl_doubleSpinBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Отступ от колонны:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="step_bw_sl_doubleSpinBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QDoubleSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QDoubleSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QDoubleSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QDoubleSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QDoubleSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QDoubleSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QDoubleSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QDoubleSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="maximum">
+                <double>100000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_16">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Шаг между стойками:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="pocket_checkBox">
+            <property name="styleSheet">
+             <string notr="true">QCheckBox{
+font: bold 14pt &quot;Times New Roman&quot;;
+color:rgb(235, 235, 235);
+}
+QCheckBox::indicator {
+    border: 3px solid #5A5A5A;
+}
+QCheckBox::indicator:unchecked:pressed
+{
+background-color : green;
+}
+QCheckBox::indicator:checked {
+    image: url(:/other/dop/dialog_ok_apply_icon.png);
+	height: 12;
+	width: 12;
+	border:1px solid #5A5A5A;
+	background-color : white;
+}
+QCheckBox::checked{
+color:rgb(189, 255, 178);
+}</string>
+            </property>
+            <property name="text">
+             <string>Карман монтажный</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="minimumSize">
+             <size>
+              <width>170</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>170</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="tp_pushButton">
+            <property name="minimumSize">
+             <size>
+              <width>300</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.75, y1:0.204545, x2:1, y2:0, stop:0 rgba(36, 140, 255, 255), stop:1 rgba(106, 232, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 12pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 171, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+            </property>
+            <property name="text">
+             <string>Рассчитать ТП</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_6" native="true">
+            <layout class="QFormLayout" name="formLayout_8">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="minimumSize">
+                <size>
+                 <width>170</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QPushButton" name="canselButton">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+     background-color: qlineargradient(spread:pad, x1:0.823864, y1:0.693, x2:1, y2:1, stop:0 rgba(19, 43, 255, 255), stop:1 rgba(113, 149, 255, 255));
+     border-style: outset;
+     border-radius: 10px;
+     font: 14pt &quot;Times New Roman&quot;;
+	 color:white;
+ }
+
+QPushButton:hover{
+     background-color:qlineargradient(spread:reflect, x1:0, y1:0.261, x2:0.989, y2:0, stop:0.267045 rgba(255, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));
+     border-style: inset;
+     font: 18pt &quot;Times New Roman&quot;;
+	 color:black;
+ }</string>
+               </property>
+               <property name="text">
+                <string>Выход</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_5" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <property name="labelAlignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="formAlignment">
+        <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_develop">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>MS Sans Serif</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <italic>true</italic>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Develop by Metliaev Ivan</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="logo">
+         <property name="minimumSize">
+          <size>
+           <width>45</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">image:url(:/logo/logo/35th Parallel-logos1.png);
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../../Prodaction-record-program/images/images_store.qrc"/>
+ </resources>
+ <connections/>
+</ui>

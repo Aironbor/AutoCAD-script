@@ -7,6 +7,8 @@
     <file>dop/arrow.png</file>
   </qresource>
   <qresource prefix="other">
+    <file>dop/Navigate-down-icon.png</file>
+    <file>dop/Navigate-up-icon.png</file>
     <file>dop/dialog_ok_apply_icon.png</file>
     <file>dop/attantion.png</file>
     <file>dop/error.png</file>

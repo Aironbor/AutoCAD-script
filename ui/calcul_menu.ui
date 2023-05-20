@@ -27,107 +27,11 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget#centralwidget{
-     background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.00568182 rgba(63, 140, 237, 255), stop:1 rgba(164, 221, 255, 255));
+     background:qlineargradient(spread:pad, x1:0.077, y1:0.113773, x2:1, y2:1, stop:0.522727 rgba(66, 110, 187, 248), stop:1 rgba(30, 34, 187, 255));
+
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>70</y>
-      <width>91</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    border: 1px solid gray;
-    border-radius: 10px;
-    font: 75 14pt &quot;Times New Roman&quot;;
-	color: black;
-}
-QComboBox QAbstractItemView {
-    border: 3px solid darkgray;
-    selection-background-color:qlineargradient(spread:pad, x1:0.886, y1:0.0625, x2:1, y2:0, stop:0.869318 rgba(0, 124, 255, 237), stop:1 rgba(255, 255, 255, 255));
-	color: black;
-}
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-	color: black;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 15px;
-    border-left-width: 1px;
-    border-left-color: darkgray;
-    border-left-style: solid; /* just a single line */
-    border-top-right-radius: 3px; /* same radius as the QComboBox */
-    border-bottom-right-radius: 3px;
-	color: black;
-}
-
-QComboBox::down-arrow {
-    image:url(:/arrow/dop/arrow.png);
-	height: 18;
-	width: 18;
-}
-
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
-}
-QComboBox:editable {
-    background: white;
-	color: black;
-	}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-}
-
-/* QComboBox gets the &quot;on&quot; state when the popup is open */
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
-                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
-}
-QComboBox QAbstractItemView::item:hover {
-    color: black;
-    background-color: lightgreen;   /*  The whole drop-down window crosss the background color of each item */
-}
-
-/*  After dropping, the entire drop-down window is selected for each pattern. */
-QComboBox QAbstractItemView::item:selected {
-   	color: black;
-    background-color: lightgreen;
-}
-QComboBox:hover {
-    background:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(209, 248, 255, 255), stop:1 rgba(234, 255, 255, 255));
-	color: black;
-}</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>ТП-1</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>ТП-2</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>ТП-3</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
@@ -415,23 +319,6 @@ QPushButton:hover{
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>314</x>
-      <y>70</y>
-      <width>141</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: bold 14pt &quot;Times New Roman&quot;;
-color: rgb(235, 235, 235);</string>
-    </property>
-    <property name="text">
-     <string>Отправ. марка:</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="canselButton">
     <property name="geometry">
      <rect>
@@ -613,110 +500,6 @@ QPushButton:hover{
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QWidget" name="layoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>254</width>
-       <height>121</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="formLayout_5">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_21">
-        <property name="styleSheet">
-         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Ширина Торца:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QDoubleSpinBox" name="width_doubleSpinBox_4">
-        <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="maximum">
-         <double>100000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_20">
-        <property name="styleSheet">
-         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Высота стенки:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="wall_haight_doubleSpinBox_2">
-        <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="maximum">
-         <double>1000000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_22">
-        <property name="styleSheet">
-         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Высота полная:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QDoubleSpinBox" name="full_height_doubleSpinBox_3">
-        <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="maximum">
-         <double>1000000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_23">
-        <property name="styleSheet">
-         <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Размер нащельника:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QDoubleSpinBox" name="batten_2g_height_doubleSpinBox_3">
-        <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
-        </property>
-        <property name="maximum">
-         <double>1000000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
    </widget>
    <widget class="QFrame" name="frame_sl">
     <property name="geometry">
@@ -831,7 +614,6 @@ QPushButton:hover{
      </layout>
     </widget>
    </widget>
-   <zorder>comboBox</zorder>
    <zorder>label_4</zorder>
    <zorder>secondlayout_checkBox</zorder>
    <zorder>pocket_checkBox</zorder>
@@ -841,7 +623,6 @@ QPushButton:hover{
    <zorder>label_11</zorder>
    <zorder>label_12</zorder>
    <zorder>label_13</zorder>
-   <zorder>label_14</zorder>
    <zorder>canselButton</zorder>
    <zorder>frame_tp_1</zorder>
    <zorder>frame_tp_3</zorder>
@@ -850,7 +631,7 @@ QPushButton:hover{
  </widget>
  <resources>
   <include location="../images/main_image.qrc"/>
-  <include location="../../pythonProject1/AutoCAD script/AutoCAD script/images/main_image.qrc"/>
+  <include location="../images/main_image.qrc"/>
  </resources>
  <connections>
   <connection>
