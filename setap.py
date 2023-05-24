@@ -23,7 +23,8 @@ SETUP_DICT = {
     'windows': [{'script': 'main_awe_v0.9.py'}],
     'options': {
         'py2exe': {
-            'includes': ["lxml._elementpath", "PyQt5.QtCore", "PyQt5.QtGui", "PyQt5.QtWidgets", "imain_image", "win32com.client", "pythoncom"]
+            'includes': ["lxml._elementpath", "PyQt5.QtCore", "PyQt5.QtGui", "PyQt5.QtWidgets", "images_store",
+                         "win32com.client", "pythoncom"]
         },
     }
 }

@@ -137,9 +137,13 @@ class ExcelExport:
                 worksheet_0.write_formula(current_row, 6, f'=F{num_for_formuls}*{self.quantity}',
                                           self.special_numb)
                 # Площадь 1
-                worksheet_0.write_formula(current_row, 7,
-                                          f'=D{num_for_formuls}*E{num_for_formuls} / 1000000',
-                                          self.float_numb_w_board)
+                if sameproduct_key == 'ТП-3':
+                    worksheet_0.write(current_row, 7,
+                                              float(list_of_data[sameproduct_key][3]), self.float_numb_w_board)
+                else:
+                    worksheet_0.write_formula(current_row, 7,
+                                              f'=D{num_for_formuls}*E{num_for_formuls} / 1000000',
+                                              self.float_numb_w_board)
                 # Площадь Итого
                 worksheet_0.write_formula(current_row, 8,
                                           f'=H{num_for_formuls}*G{num_for_formuls}',
@@ -149,6 +153,6 @@ class ExcelExport:
                 num_for_formuls += 1
             worksheet_0.merge_range(current_row, 0, current_row, 7, f'Итого {type_of_tp}:',
                                     self.name_merge_format_2)
-            worksheet_0.write(current_row, 8, f'=SUM(I3:I{current_row-1})', self.float_numb_w_board)
+            worksheet_0.write(current_row, 8, f'=SUM(I3:I{current_row - 1})', self.float_numb_w_board)
         self.workbook.close()
         os.startfile(f'Спецификация\Спецификация.xlsx')

@@ -27,26 +27,19 @@ class MainMenu(QMainWindow):
     def __init__(self, parent=None, flag=Qt.Window):
         super().__init__(parent, flag)  # Call the inherited classes __init__ method
         uic.loadUi('ui/calcul_menuv2.ui', self)
+        self.acad = ""
+        self.acadModel = ""
+        self.MainWindow = ""
         self.comboBox.currentIndexChanged.connect(self.indexChanged)
         self.first_try = True
+        self.status_Error = False
         self.load_menu(self.comboBox.currentText())
         self.batten_2g_height_doubleSpinBox_3.setValue(700.00)
         self.size_to_sl_doubleSpinBox.setValue(1.00)
         self.step_bw_sl_doubleSpinBox.setValue(1.00)
         self.main_data_for_spec = {}  # Словарь зависимость марка - словарь полуфабрикатов
-        self.data_of_product = []
-        self.qount_of_product = []
-        self.width_of_product = []
-        self.length_of_product = []
         self.area_of_product = []
-        try:
-            self.acad = win32com.client.Dispatch("AutoCAD.Application")
-            self.acad.Visible = True
-            self.acadModel = self.acad.ActiveDocument.ModelSpace
-        except pywintypes.com_error:
-            error = 'Чертежный вид в Автокаде (модель) не открыт! Откройте чертеж перед запуском раскроя!'
-            self.MainWindow = ErrorAddReport(error)
-            self.MainWindow.show()
+        self.check_the_autocad()
 
     def APoint(self, x, y, z=0):
         return win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8, (x, y, z))
@@ -60,6 +53,18 @@ class MainMenu(QMainWindow):
     def indexChanged(self):
         choose_tp = self.comboBox.currentText()
         self.load_menu(choose_tp)
+
+    def check_the_autocad(self):
+        try:
+            self.status_Error = False
+            self.acad = win32com.client.Dispatch("AutoCAD.Application")
+            self.acad.Visible = True
+            self.acadModel = self.acad.ActiveDocument.ModelSpace
+        except pywintypes.com_error:
+            self.status_Error = True
+            error = 'Чертежный вид в Автокаде (модель) не открыт! Откройте чертеж перед запуском раскроя!'
+            self.MainWindow = ErrorAddReport(error)
+            self.MainWindow.show()
 
     def load_menu(self, choose_tp):
         if choose_tp == 'ТП-1' or choose_tp == 'ТП-2':
@@ -94,6 +99,12 @@ class MainMenu(QMainWindow):
         else:
             self.dop_infa_for_sl_tp3_widget.hide()
 
+    def draw_a_tp_3(self):
+        if self.status_Error is False:
+            self.draw_tp3_btn()
+        else:
+            self.check_the_autocad()
+
     def count_and_drow_tp_btn(self):
         width_tp = self.width_doubleSpinBox_2.value()
         size_of_tp_width = width_tp - 150 * 2
@@ -114,21 +125,15 @@ class MainMenu(QMainWindow):
             msg.setDefaultButton(button_aceptar)
             msg.exec_()
             if msg.clickedButton() == button_aceptar:
-                try:
+                if self.status_Error is False:
                     self.draw_and_count_the_polotno()
-                except _ctypes.COMError:
-                    error = 'Ошибка получения данных чертежа! Чертежный вид в Автокаде (модель) не открыт!'
-                    self.MainWindow = ErrorAddReport(error)
-                    self.MainWindow.show()
-            else:
-                pass
+                else:
+                    self.check_the_autocad()
         else:
-            try:
+            if self.status_Error is False:
                 self.draw_and_count_the_polotno()
-            except _ctypes.COMError:
-                error = 'Ошибка получения данных чертежа! Чертежный вид в Автокаде (модель) не открыт!'
-                self.MainWindow = ErrorAddReport(error)
-                self.MainWindow.show()
+            else:
+                self.check_the_autocad()
 
     def draw_and_count_the_polotno(self):
         type_of_tp = self.comboBox.currentText()
@@ -217,16 +222,30 @@ class MainMenu(QMainWindow):
                                            p_polotno_x_3, p_polotno_y_3, p_polotno_x_4, p_polotno_y_4,
                                            p_polotno_x_1, p_polotno_y_1])
             # Чертим полотно полилинией
-            self.acadModel.AddLightWeightPolyline(points_polotno)
+            polotno_main_tp1_2 = self.acadModel.AddLightWeightPolyline(points_polotno)
+            polotno_main_tp1_2.Offset(100)  # Строим подгиб полотна
             # Назначаем точки для нащельника 1г
-            p_batten_1g_x_1 = p_13 - 40
-            p_batten_1g_y_1 = p_2
-            p_batten_1g_x_2 = p_13 - 40
-            p_batten_1g_y_2 = y_point_batten_2g_width
-            p_batten_1g_x_3 = p_13 - 40 + x_point_batten_2g_length
-            p_batten_1g_y_3 = y_point_batten_2g_width
-            p_batten_1g_x_4 = p_13 - 40 + x_point_batten_2g_length
-            p_batten_1g_y_4 = p_2
+            if tp == 1:
+                size_of_batten_2g_x3_real = p_polotno_x_2 + 550
+                p_batten_1g_x_1 = p_1
+                p_batten_1g_y_1 = p_2
+                p_batten_1g_x_2 = p_1
+                p_batten_1g_y_2 = y_point_batten_2g_width
+                p_batten_1g_x_3 = p_1 + size_of_batten_2g_x3_real
+                p_batten_1g_y_3 = y_point_batten_2g_width
+                p_batten_1g_x_4 = p_1 + size_of_batten_2g_x3_real
+                p_batten_1g_y_4 = p_2
+            else:
+                size_of_batten_2g_x3_real = p_polotno_x_2
+                p_batten_1g_x_1 = p_13 - 150
+                p_batten_1g_y_1 = p_2
+                p_batten_1g_x_2 = p_13 - 150
+                p_batten_1g_y_2 = y_point_batten_2g_width
+                p_batten_1g_x_3 = p_13 - 150 + size_of_batten_2g_x3_real
+                p_batten_1g_y_3 = y_point_batten_2g_width
+                p_batten_1g_x_4 = p_13 - 150 + size_of_batten_2g_x3_real
+                p_batten_1g_y_4 = p_2
+                size_of_batten_2g_x3_real += p_batten_1g_y_1
             # Чертим нащельник 1г
             points_batten_1g = self.aDouble([p_batten_1g_x_1, p_batten_1g_y_1, p_batten_1g_x_2,
                                              p_batten_1g_y_2, p_batten_1g_x_3, p_batten_1g_y_3,
@@ -280,22 +299,33 @@ class MainMenu(QMainWindow):
                 acad.model.AddDimAligned(p_polotno_1_2, p_polotno_1_3, p_razmer_w)
                 acad.model.AddDimAligned(p_batten_1v_1, p_batten_1v2_4, p_razmer_w_down)
             elif tp == 2:
-                p_batten_1g_1 = APoint(p_13 - 40 - 110, p_2)
+                p_batten_1g_1 = APoint(p_13 - 150, p_2)
                 acad.model.AddDimAligned(p_batten_1g_1, p_polotno_1_2, p_razmer_l)
                 acad.model.AddDimAligned(p_polotno_1_2, p_polotno_1_3, p_razmer_w)
-                p_batten_1g_1 = APoint(p_13 - 40, p_2)
+                p_batten_1g_1 = APoint(p_13 - 150, p_2)
                 acad.model.AddDimAligned(p_batten_1g_1, p_batten_1v2_4, p_razmer_w_down)
 
             if type_of_tp == 'ТП-2':
                 # Назначаем точки для нащельника 2г
-                p_batten_2g_x_1 = p_13 - 40
-                p_batten_2g_y_1 = size_of_batten_1v_length - 150
-                p_batten_2g_x_2 = p_13 - 40
-                p_batten_2g_y_2 = size_of_batten_1v_length + 600
-                p_batten_2g_x_3 = p_13 - 40 + x_point_batten_2g_length
-                p_batten_2g_y_3 = size_of_batten_1v_length + 600
-                p_batten_2g_x_4 = p_13 - 40 + x_point_batten_2g_length
-                p_batten_2g_y_4 = size_of_batten_1v_length - 150
+                if tp == 1:
+                    p_batten_2g_x_1 = p_1
+                    p_batten_2g_y_1 = size_of_batten_1v_length - 150
+                    p_batten_2g_x_2 = p_1
+                    p_batten_2g_y_2 = size_of_batten_1v_length + 600
+                    p_batten_2g_x_3 = p_1 + size_of_batten_2g_x3_real
+                    p_batten_2g_y_3 = size_of_batten_1v_length + 600
+                    p_batten_2g_x_4 = p_1 + size_of_batten_2g_x3_real
+                    p_batten_2g_y_4 = size_of_batten_1v_length - 150
+                else:
+                    p_batten_2g_x_1 = p_13 - 150
+                    p_batten_2g_y_1 = size_of_batten_1v_length - 150
+                    p_batten_2g_x_2 = p_13 - 150
+                    p_batten_2g_y_2 = size_of_batten_1v_length + 600
+                    p_batten_2g_x_3 = p_13 - 150 + size_of_batten_2g_x3_real
+                    p_batten_2g_y_3 = size_of_batten_1v_length + 600
+                    p_batten_2g_x_4 = p_13 - 150 + size_of_batten_2g_x3_real
+                    p_batten_2g_y_4 = size_of_batten_1v_length - 150
+
                 points_batten_2g = self.aDouble([p_batten_2g_x_1, p_batten_2g_y_1,
                                                  p_batten_2g_x_2, p_batten_2g_y_2,
                                                  p_batten_2g_x_3, p_batten_2g_y_3,
@@ -435,7 +465,6 @@ class MainMenu(QMainWindow):
                 p_dop_polyfabr1_2_1 = APoint(p_dop_r_4 + 1000, p_2)
                 p_dop_polyfabr1_2_2 = APoint(p_dop_r_4 + 1000, p_dop_r_2)
                 p_dop_polyfabr1_2_4 = APoint(p_dop_r_4 + 1000 + width_remains, p_2)
-                self.qount_of_product.append(quantity_of_p)
                 print(quantity_of_p)
                 # Чертим П-1-2
                 self.acadModel.AddLightWeightPolyline(points_pp_21)
@@ -499,25 +528,27 @@ class MainMenu(QMainWindow):
                                                       dem_const_batten_1v_length]
             make_dimension_length(p_batten_1v_dop_1, p_batten_1v_dop_2)
             make_dimension_width(p_batten_1v_dop_1, p_batten_1v_dop_4)
-            # Точки нащельника 2
-            points_bg2 = self.aDouble([p_second_layer_dop_14 + 2000 + size_of_batten_1v_width, p_2,
-                                       p_second_layer_dop_14 + 2000 + size_of_batten_1v_width,
-                                       size_of_batten_2g_length,
-                                       p_second_layer_dop_14 + 2000 + size_of_batten_1v_width
-                                       + size_of_batten_2g_width, size_of_batten_2g_length,
-                                       p_second_layer_dop_14 + 2000 + size_of_batten_1v_width
-                                       + size_of_batten_2g_width, p_2,
-                                       p_second_layer_dop_14 + 1000, p_2])
+            # Точки нащельника горизонтального Н2 Г
+            p_bg2_x1 = p_second_layer_dop_14 + 2000 + size_of_batten_1v_width
+            p_bg2_y1 = p_2
+            p_bg2_x2 = p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + size_of_batten_2g_width
+            p_bg2_y2 = size_of_batten_2g_x3_real
+            points_bg2 = self.aDouble([p_bg2_x1, p_bg2_y1,
+                                       p_bg2_x1, p_bg2_y2,
+                                       p_bg2_x2, p_bg2_y2,
+                                       p_bg2_x2, p_bg2_y1,
+                                       p_bg2_x1, p_bg2_y1])
+            if tp == 2:
+                print(points_bg2)
             self.acadModel.AddLightWeightPolyline(points_bg2)  # Чертим Н 2 гориз отдельно
             p_batten_2g_dop_1 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width, p_2)
             p_batten_2g_dop_2 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width,
-                                       size_of_batten_2g_length)
+                                       size_of_batten_2g_x3_real)
             p_batten_2g_dop_4 = APoint(
                 p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + size_of_batten_2g_width, p_2)
-
             p_text_about_dop_b12 = APoint(
                 p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + (size_of_batten_1v_width / 4),
-                y_text_about_dop)
+                size_of_batten_2g_x3_real)
             qount_of_batten = 1
             # Добавляем надписи по нащельникам
             if type_of_tp == 'ТП-1':
@@ -533,15 +564,15 @@ class MainMenu(QMainWindow):
             make_dimension_width(p_batten_2g_dop_1, p_batten_2g_dop_4)
             # Очерчиваем отдельно карман, если он был выбран в меню
             if self.pocket_checkBox.isChecked():
-                points_bg2 = self.aDouble([p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2,
+                points_pocket = self.aDouble([p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2,
                                            p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
                                            y_pocket_lenght,
                                            p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
                                            y_pocket_lenght,
                                            p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
                                            p_2,
-                                           p_second_layer_dop_14 + 1000, p_2])
-                self.acadModel.AddLightWeightPolyline(points_bg2)  # Чертим карман полилинией
+                                           p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2])
+                self.acadModel.AddLightWeightPolyline(points_pocket)  # Чертим карман полилинией
                 p_pocket_km_dop_1 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
                                            p_2)
                 p_pocket_km_dop_2 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
@@ -567,7 +598,7 @@ class MainMenu(QMainWindow):
             y_text_about_dop += size_of_batten_2g_length + size_of_tp_length
             p_razmer_6 += size_of_batten_2g_length + size_of_tp_length - 500
             p_razmer_4 += size_of_batten_2g_length + size_of_tp_length
-            p_razmer_2 += size_of_batten_2g_length + size_of_tp_length - 100.0
+            p_razmer_2 += size_of_batten_2g_length + size_of_tp_length
             y_point_batten_2g_width += size_of_batten_2g_length + size_of_tp_length
             size_of_polotna_l += size_of_batten_2g_length + size_of_tp_length
             size_of_batten_1v_length += size_of_batten_2g_length + size_of_tp_length
@@ -596,10 +627,6 @@ class MainMenu(QMainWindow):
             acad = win32com.client.Dispatch("AutoCAD.Application")
             acad.Visible = True
             acadModel = acad.ActiveDocument.ModelSpace
-
-            def aDouble(xyz):
-                return win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8, xyz)
-
             data_for_spec = {}  # Словарь зависимость полуфабрикат - его данные(кол-во, ширина, длинна)
             # Изначальные данные
             # Ширина торца ангара
@@ -681,9 +708,7 @@ class MainMenu(QMainWindow):
             # Чертим торец ангара с помощью полилинии
             well_end_drawing = acadModel.AddLightWeightPolyline(points_wall_end)
             # Добавляем информацию о полотне в списки
-
-            self.data_of_product.append('ТП-3')
-            data_for_spec['ТП-3'] = [1, x_batten_2 - 150, y_height_dim_2 - 150]
+            data_for_spec['ТП-3'] = [1, x_batten_2 - 150, y_height_dim_2 - 150, full_area_tp_3]
             # Смещаем полилинию
             well_end_drawing.Offset(150)
             # Контур Второго слоя
@@ -726,7 +751,7 @@ class MainMenu(QMainWindow):
                         data_for_spec[f'В-3-{count_sl}'] = [2, 100, y_slayout_2]
                         count_sl += 1
                 else:
-                    points_sl = aDouble(
+                    points_sl = self.aDouble(
                         [x_slayout_1, y_slayout_1, x_slayout_1, y_slayout_2, x_slayout_2, y_slayout_2, x_slayout_2,
                          y_slayout_1])
                     # Чертим второй слой с помощью полилинии
@@ -747,8 +772,6 @@ class MainMenu(QMainWindow):
                 # Cчитаем площадь кармана
                 full_area_pocket = (x_pocket_2 - x_pocket_1) * 150 / 1000000
                 data_for_spec[f'КМ-3-1'] = [1, x_pocket_2 - x_pocket_1, 150]
-                self.data_of_product.append(f'КМ-3.1')
-                self.width_of_product.append(x_pocket_2 - x_pocket_1)
             self.main_data_for_spec[f'ТП-3'] = [data_for_spec]
             # Cтавим размер полотна по высоте
             make_dimension_height(x_zero_dim_1, y_zero_dim_1, x_height_dim_2, y_height_dim_2, 1500)
