@@ -17,6 +17,7 @@ from PyQt5.QtGui import QIcon, QPixmap
 from pyautocad import APoint
 import math
 from pyautocad import Autocad
+import pyautocad
 import images_store
 from xlsxwriter.exceptions import FileCreateError
 from export_to_excel import ExcelExport
@@ -31,8 +32,14 @@ class MainMenu(QMainWindow):
         self.acadModel = ""
         self.MainWindow = ""
         self.comboBox.currentIndexChanged.connect(self.indexChanged)
+        self.cutt_comboBox.currentIndexChanged.connect(self.change_cut_size)
         self.first_try = True
+        self.already_connect = True
+        self.tp1 = True
+        self.tp3a = False
         self.status_Error = False
+        self.quantity_arc_spinBox.setValue(10)
+        self.change_cut_size()
         self.load_menu(self.comboBox.currentText())
         self.batten_2g_height_doubleSpinBox_3.setValue(700.00)
         self.size_to_sl_doubleSpinBox.setValue(1.00)
@@ -65,33 +72,66 @@ class MainMenu(QMainWindow):
             error = 'Чертежный вид в Автокаде (модель) не открыт! Откройте чертеж перед запуском раскроя!'
             self.MainWindow = ErrorAddReport(error)
             self.MainWindow.show()
+        except AttributeError:
+            self.status_Error = True
+            error = 'Чертежный вид в Автокаде редактируется!'
+            self.MainWindow = ErrorAddReport(error)
+            self.MainWindow.show()
 
     def load_menu(self, choose_tp):
         if choose_tp == 'ТП-1' or choose_tp == 'ТП-2':
             # Скрываем меню для ТП-3
+            if self.already_connect:
+                self.tp_pushButton.clicked.connect(self.count_and_drow_tp_btn)
+                self.already_connect = False
+            self.label_17.hide()
+            self.quantity_arc_spinBox.hide()
             self.tp_3_widget.hide()
             self.dop_infa_for_sl_tp3_widget.hide()
             # Показываекм меню для ТП-1
             self.tp_1_widget.show()
             self.quantity_spinBox.setValue(2)
             MainMenu.setMinimumSize(self, 624, 580)
+            self.tp1 = True
+            if self.tp3a:
+                self.label_17.hide()
+                self.quantity_arc_spinBox.hide()
+                self.tp3a = False
             if self.first_try is False:
                 self.secondlayout_checkBox.clicked.disconnect(self.show_the_dop_info_for_tp3)
-                self.tp_pushButton.clicked.disconnect(self.draw_tp3_btn)
+                self.tp_pushButton.clicked.disconnect(self.draw_a_tp_3)
                 self.first_try = True
-            self.tp_pushButton.clicked.connect(self.count_and_drow_tp_btn)
-
         else:
+            self.already_connect = True
             # Скрываем меню для ТП-1 и ТП-2
             MainMenu.setMinimumSize(self, 624, 720)
-            self.tp_pushButton.clicked.disconnect(self.count_and_drow_tp_btn)
-            self.tp_pushButton.clicked.connect(self.draw_tp3_btn)
+            if self.tp1:
+                self.tp_pushButton.clicked.disconnect(self.count_and_drow_tp_btn)
+            if choose_tp == "ТП-3А":
+                self.tp3a = True
+                self.label_17.show()
+                self.quantity_arc_spinBox.show()
+            else:
+                self.tp3a = False
+            self.tp_pushButton.clicked.connect(self.draw_a_tp_3)
             self.tp_1_widget.hide()
             self.first_try = False
             # Показываекм меню для ТП-3
+            self.tp1 = False
             self.secondlayout_checkBox.setChecked(False)
             self.secondlayout_checkBox.clicked.connect(self.show_the_dop_info_for_tp3)
             self.tp_3_widget.show()
+
+    def change_cut_size(self):
+        whats_sise = self.cutt_comboBox.currentText()
+        if whats_sise != "Другой":
+            self.count_doubleSpinBox_2.hide()
+            whats_sise = int(whats_sise)
+            self.count_doubleSpinBox_2.setValue(whats_sise)
+            self.label_9.hide()
+        else:
+            self.label_9.show()
+            self.count_doubleSpinBox_2.show()
 
     def show_the_dop_info_for_tp3(self):
         if self.secondlayout_checkBox.isChecked():
@@ -99,9 +139,36 @@ class MainMenu(QMainWindow):
         else:
             self.dop_infa_for_sl_tp3_widget.hide()
 
+    def draw_tp_1(self):
+        if self.status_Error is False:
+            try:
+                self.draw_and_count_the_polotno()
+            except _ctypes.COMError:
+                error = 'Чертежный вид в настоящее время редактируется!'
+                self.MainWindow = ErrorAddReport(error)
+                self.MainWindow.show()
+            except pywintypes.com_error:
+                error = 'Операция прервана. Чертежный вид в настоящее время редактируется!'
+                self.MainWindow = ErrorAddReport(error)
+                self.MainWindow.show()
+        else:
+            self.check_the_autocad()
+
     def draw_a_tp_3(self):
         if self.status_Error is False:
-            self.draw_tp3_btn()
+            try:
+                if self.tp3a:
+                    self.draw_arc_tp3_btn()
+                else:
+                    self.draw_tp3_btn()
+            except _ctypes.COMError:
+                error = 'Чертежный вид в настоящее время редактируется!'
+                self.MainWindow = ErrorAddReport(error)
+                self.MainWindow.show()
+            except pywintypes.com_error:
+                error = 'Операция прервана. Чертежный вид в настоящее время редактируется!'
+                self.MainWindow = ErrorAddReport(error)
+                self.MainWindow.show()
         else:
             self.check_the_autocad()
 
@@ -121,19 +188,13 @@ class MainMenu(QMainWindow):
             msg.setFocus()
             msg.setStyleSheet("font: 75 12pt bold \"Times New Roman\";")
             button_aceptar = msg.addButton("Да", QtWidgets.QMessageBox.YesRole)
-            button_cancelar = msg.addButton("Отменить", QtWidgets.QMessageBox.RejectRole)
+            msg.addButton("Отменить", QtWidgets.QMessageBox.RejectRole)
             msg.setDefaultButton(button_aceptar)
             msg.exec_()
             if msg.clickedButton() == button_aceptar:
-                if self.status_Error is False:
-                    self.draw_and_count_the_polotno()
-                else:
-                    self.check_the_autocad()
+                self.draw_tp_1()
         else:
-            if self.status_Error is False:
-                self.draw_and_count_the_polotno()
-            else:
-                self.check_the_autocad()
+            self.draw_tp_1()
 
     def draw_and_count_the_polotno(self):
         type_of_tp = self.comboBox.currentText()
@@ -142,18 +203,16 @@ class MainMenu(QMainWindow):
             main_num_of_tp = 1
         elif type_of_tp == 'ТП-2':
             main_num_of_tp = 2
-        # AutoCAD = win32com.client.Dispatch("AutoCAD.Application")
         acad = Autocad(create_if_not_exists=False)
         acad.Visible = True
         acadModel = acad.ActiveDocument.ModelSpace
-        # acad = win32com.client.Dispatch("AutoCAD.Application")
         width_tp = self.width_doubleSpinBox_2.value()
         length_tp = self.length_doubleSpinBox_2.value()
         quantity = self.quantity_spinBox.value()
         size_of_tp_width = width_tp - 150 * 2
         size_of_tp_length = length_tp - 150 * 2
         size_of_batten_1v_width = 700
-        size_of_batten_1v_length = size_of_tp_length
+        size_of_batten_1v_length = size_of_tp_length + size_of_batten_1v_width - 150
         size_of_batten_2g_width = 700
         size_of_batten_2g_length = size_of_tp_width - 110 * 2
         quantity_batten_1v = quantity * 2
@@ -193,12 +252,14 @@ class MainMenu(QMainWindow):
         dem_const_batten_2g_length = size_of_batten_2g_length
         dem_const_pocket_length = y_pocket_lenght
         y_pocket_in_main_pic = 0
+        size_of_batten_2g_x3_old = 0
         if type_of_tp == 'ТП-1':
             y_batten_vertic = size_of_batten_1v_length
             y_pocket_in_main_pic = y_batten_vertic / 2 - 75
         elif type_of_tp == 'ТП-2':
             y_batten_vertic = size_of_batten_1v_length + 600
             y_pocket_in_main_pic = y_batten_vertic / 2 - 75
+
         for tp in quantity_of_tp_common:
             data_for_spec = {}  # Словарь зависимость полуфабрикат - его данные(кол-во, ширина, длинна)
             p_text = APoint(p_for_text, p_for_text_2)
@@ -206,9 +267,10 @@ class MainMenu(QMainWindow):
             # Чертим нащельник 1в
             if tp == 1:
                 # Назначаем точки для нащельника 1в
-                points_pocket = self.aDouble([p_1, p_2, p_12, y_batten_vertic, p_13, y_batten_vertic,
-                                              p_13, p_2, p_1, p_2])
-                self.acadModel.AddLightWeightPolyline(points_pocket)
+                points_butten_v1 = self.aDouble([p_1, p_2, p_12, y_batten_vertic, p_13, y_batten_vertic,
+                                                 p_13, p_2, p_1, p_2])
+                butten_v1 = self.acadModel.AddLightWeightPolyline(points_butten_v1)
+                butten_v1.Closed = True
             # Назначаем точки для полотная ТП 1.1
             p_polotno_x_1 = p_13 - 150
             p_polotno_y_1 = size_of_batten_1v_length
@@ -245,6 +307,7 @@ class MainMenu(QMainWindow):
                 p_batten_1g_y_3 = y_point_batten_2g_width
                 p_batten_1g_x_4 = p_13 - 150 + size_of_batten_2g_x3_real
                 p_batten_1g_y_4 = p_2
+                size_of_batten_2g_x3_old = size_of_batten_2g_x3_real
                 size_of_batten_2g_x3_real += p_batten_1g_y_1
             # Чертим нащельник 1г
             points_batten_1g = self.aDouble([p_batten_1g_x_1, p_batten_1g_y_1, p_batten_1g_x_2,
@@ -266,7 +329,8 @@ class MainMenu(QMainWindow):
                                               p_batten_1v2_y_2, p_batten_1v2_x_3, p_batten_1v2_y_3,
                                               p_batten_1v2_x_4, p_batten_1v2_y_4, p_batten_1v2_x_1,
                                               p_batten_1v2_y_1])
-            self.acadModel.AddLightWeightPolyline(points_batten_1v2)
+            batten_1v2 = self.acadModel.AddLightWeightPolyline(points_batten_1v2)
+            batten_1v2.Closed = True
             # Проверяем выбран ли второй слой для его отображение на чертеже
             if self.secondlayout_checkBox.isChecked():
                 # Назначаем точки для второго слоя на общем виде
@@ -284,7 +348,8 @@ class MainMenu(QMainWindow):
                                                     p_second_layer_x_3, p_second_layer_y_3,
                                                     p_second_layer_x_4, p_second_layer_y_4,
                                                     p_second_layer_x_1, p_second_layer_y_1])
-                self.acadModel.AddLightWeightPolyline(points_second_layer)
+                second_layer = self.acadModel.AddLightWeightPolyline(points_second_layer)
+                second_layer.Closed = True
             # Точки для размеров
             p_batten_1v_1 = APoint(p_1, p_2)
             p_batten_1v_2 = APoint(p_12, y_batten_vertic)
@@ -321,9 +386,9 @@ class MainMenu(QMainWindow):
                     p_batten_2g_y_1 = size_of_batten_1v_length - 150
                     p_batten_2g_x_2 = p_13 - 150
                     p_batten_2g_y_2 = size_of_batten_1v_length + 600
-                    p_batten_2g_x_3 = p_13 - 150 + size_of_batten_2g_x3_real
+                    p_batten_2g_x_3 = p_13 - 150 + size_of_batten_2g_x3_old
                     p_batten_2g_y_3 = size_of_batten_1v_length + 600
-                    p_batten_2g_x_4 = p_13 - 150 + size_of_batten_2g_x3_real
+                    p_batten_2g_x_4 = p_13 - 150 + size_of_batten_2g_x3_old
                     p_batten_2g_y_4 = size_of_batten_1v_length - 150
 
                 points_batten_2g = self.aDouble([p_batten_2g_x_1, p_batten_2g_y_1,
@@ -331,7 +396,8 @@ class MainMenu(QMainWindow):
                                                  p_batten_2g_x_3, p_batten_2g_y_3,
                                                  p_batten_2g_x_4, p_batten_2g_y_4,
                                                  p_batten_2g_x_1, p_batten_2g_y_1])
-                self.acadModel.AddLightWeightPolyline(points_batten_2g)
+                batten_2g = self.acadModel.AddLightWeightPolyline(points_batten_2g)
+                batten_2g.Closed = True
             if self.pocket_checkBox.isChecked():
                 # Назначаем точки для кармана монтажного 2.1
                 p_km_1_x_1 = p_13 - 50
@@ -348,7 +414,8 @@ class MainMenu(QMainWindow):
                                             p_km_1_x_3, p_km_1_y_3,
                                             p_km_1_x_4, p_km_1_y_4,
                                             p_km_1_x_1, p_km_1_y_1])
-                self.acadModel.AddLightWeightPolyline(points_km_1)
+                pocket = self.acadModel.AddLightWeightPolyline(points_km_1)
+                pocket.Closed = True
             # Раскрой отдельный для ТП1.1
             size_int_polotn_w = self.count_doubleSpinBox_2.value()
             size_of_polotna_l = size_of_tp_length + 130 * 2
@@ -465,7 +532,6 @@ class MainMenu(QMainWindow):
                 p_dop_polyfabr1_2_1 = APoint(p_dop_r_4 + 1000, p_2)
                 p_dop_polyfabr1_2_2 = APoint(p_dop_r_4 + 1000, p_dop_r_2)
                 p_dop_polyfabr1_2_4 = APoint(p_dop_r_4 + 1000 + width_remains, p_2)
-                print(quantity_of_p)
                 # Чертим П-1-2
                 self.acadModel.AddLightWeightPolyline(points_pp_21)
                 if tp == 1:
@@ -538,8 +604,6 @@ class MainMenu(QMainWindow):
                                        p_bg2_x2, p_bg2_y2,
                                        p_bg2_x2, p_bg2_y1,
                                        p_bg2_x1, p_bg2_y1])
-            if tp == 2:
-                print(points_bg2)
             self.acadModel.AddLightWeightPolyline(points_bg2)  # Чертим Н 2 гориз отдельно
             p_batten_2g_dop_1 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width, p_2)
             p_batten_2g_dop_2 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width,
@@ -549,7 +613,6 @@ class MainMenu(QMainWindow):
             p_text_about_dop_b12 = APoint(
                 p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + (size_of_batten_1v_width / 4),
                 size_of_batten_2g_x3_real)
-            qount_of_batten = 1
             # Добавляем надписи по нащельникам
             if type_of_tp == 'ТП-1':
                 text_about_buttn = f'Н - {main_num_of_tp}-2 \n{quantity} шт'
@@ -565,13 +628,13 @@ class MainMenu(QMainWindow):
             # Очерчиваем отдельно карман, если он был выбран в меню
             if self.pocket_checkBox.isChecked():
                 points_pocket = self.aDouble([p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2,
-                                           p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
-                                           y_pocket_lenght,
-                                           p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
-                                           y_pocket_lenght,
-                                           p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
-                                           p_2,
-                                           p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2])
+                                              p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
+                                              y_pocket_lenght,
+                                              p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
+                                              y_pocket_lenght,
+                                              p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500 + 150,
+                                              p_2,
+                                              p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500, p_2])
                 self.acadModel.AddLightWeightPolyline(points_pocket)  # Чертим карман полилинией
                 p_pocket_km_dop_1 = APoint(p_second_layer_dop_14 + 2000 + size_of_batten_1v_width + 2500,
                                            p_2)
@@ -623,168 +686,318 @@ class MainMenu(QMainWindow):
             self.MainWindow.show()
 
     def draw_tp3_btn(self):
-        try:
-            acad = win32com.client.Dispatch("AutoCAD.Application")
-            acad.Visible = True
-            acadModel = acad.ActiveDocument.ModelSpace
-            data_for_spec = {}  # Словарь зависимость полуфабрикат - его данные(кол-во, ширина, длинна)
-            # Изначальные данные
-            # Ширина торца ангара
-            with_end_face = self.width_doubleSpinBox_4.value()
-            # Высота стенки ангара
-            wall_height = self.wall_haight_doubleSpinBox_2.value()
-            # Полная высота ангара
-            full_height = self.full_height_doubleSpinBox_3.value()
-            # Высота нащельника  горизонального
+        acad = win32com.client.Dispatch("AutoCAD.Application")
+        acad.Visible = True
+        acadModel = acad.ActiveDocument.ModelSpace
+        data_for_spec = {}  # Словарь зависимость полуфабрикат - его данные(кол-во, ширина, длинна)
+        # Изначальные данные
+        # Ширина торца ангара
+        with_end_face = self.width_doubleSpinBox_4.value()
+        # Высота стенки ангара
+        wall_height = self.wall_haight_doubleSpinBox_2.value()
+        # Полная высота ангара
+        full_height = self.full_height_doubleSpinBox_3.value()
+        # Высота нащельника  горизонального
+        size_of_batten_2g_height = self.batten_2g_height_doubleSpinBox_3.value()
+        # Ширина квадртаного блока ТП 3 и нащельника
+        width_square_block_tp3 = with_end_face - 300 * 2
+        # Точки конструкции ангара
+        p_x_1 = 0.0
+        p_y_1 = 0.0
+        p_y_2 = wall_height
+        # Координаты конька
+        p_x_2 = with_end_face / 2
+        p_y_3 = full_height
+        # Координата торца
+        p_x_3 = with_end_face
+        # Координаты нащельника
+        x_batten_1 = 150
+        y_batten_1 = 300
+        x_batten_2 = with_end_face - 150
+        y_batten_2 = - size_of_batten_2g_height + 300
+        # Координаты второго слоя
+        x_slayout_1 = self.size_to_sl_doubleSpinBox.value() - 150
+        y_slayout_1 = 250
+        x_slayout_2 = self.size_to_sl_doubleSpinBox.value() + 150
+        y_slayout_2 = full_height
+        # Вычисляем размеры. Вычиялем угол прилежащий к коньку ангара
+        angle_b = 180 - 90 - math.floor(math.atan2(full_height - wall_height, with_end_face / 2) * 180 / math.pi)
+        up_point_of_tp_3 = 150 / math.sin(math.radians(angle_b))
+        # Найдем верхнюю точку стены
+        angle_a = 180 - angle_b
+        part_of_angle_a = angle_a / 2
+        gepotinuza = 150 / math.sin(math.radians(part_of_angle_a))
+        catet_b = math.sqrt(gepotinuza ** 2 - 150 ** 2)
+        wall_height_y_coord_2 = wall_height - catet_b
+        # Выставляем координаты для размеров
+        x_zero_dim_1 = 150
+        y_zero_dim_1 = 150
+        y_height_dim_2 = full_height - up_point_of_tp_3
+        y_height_wall_dim_2 = wall_height_y_coord_2
+        x_height_dim_2 = 150
+        x_width_dim_3 = x_batten_2
+        # Cчитаем площадь полотна
+        area_square = (y_height_wall_dim_2 - 150) * (x_width_dim_3 - 150)
+        area_triangle = (((x_width_dim_3 - 150) * (y_height_dim_2 - y_height_wall_dim_2 - 300)) / 2)
+        full_area_tp_3 = round(((area_square + area_triangle) / 1000000), 2)
+        # Cчитаем площадь нащельника
+        full_area_batten = (size_of_batten_2g_height * (x_width_dim_3 - 150)) / 1000000
+
+        def make_dimension_height(first_point, scond_point, third_point, forth_point, otstup):
+            # Размер по длине
+            f_point = self.APoint(first_point, scond_point)
+            s_point = self.APoint(third_point, forth_point)
+            p_razmer_first = first_point - otstup
+            p_razmer_second = forth_point - 100.0
+            p_razmer_l = self.APoint(p_razmer_first, p_razmer_second)
+            acadModel.AddDimAligned(f_point, s_point, p_razmer_l)
+
+        def make_dimension_width(first_point, scond_point, third_point, forth_point):
+            # Размер по ширине
+            f_point = self.APoint(first_point, scond_point)
+            s_point = self.APoint(third_point, forth_point)
             size_of_batten_2g_height = self.batten_2g_height_doubleSpinBox_3.value()
-            # Ширина квадртаного блока ТП 3 и нащельника
-            width_square_block_tp3 = with_end_face - 300 * 2
-            # Точки конструкции ангара
-            p_x_1 = 0.0
-            p_y_1 = 0.0
-            p_y_2 = wall_height
-            # Координаты конька
-            p_x_2 = with_end_face / 2
-            p_y_3 = full_height
-            # Координата торца
-            p_x_3 = with_end_face
-            # Координаты нащельника
-            x_batten_1 = 150
-            y_batten_1 = 300
-            x_batten_2 = with_end_face - 150
-            y_batten_2 = - size_of_batten_2g_height + 300
-            # Координаты второго слоя
-            x_slayout_1 = self.size_to_sl_doubleSpinBox.value() - 150
-            y_slayout_1 = 250
-            x_slayout_2 = self.size_to_sl_doubleSpinBox.value() + 150
-            y_slayout_2 = full_height
-            # Вычисляем размеры. Вычиялем угол прилежащий к коньку ангара
-            angle_b = 180 - 90 - math.floor(math.atan2(full_height - wall_height, with_end_face / 2) * 180 / math.pi)
-            up_point_of_tp_3 = 150 / math.sin(math.radians(angle_b))
-            # Найдем верхнюю точку стены
-            angle_a = 180 - angle_b
-            part_of_angle_a = angle_a / 2
-            gepotinuza = 150 / math.sin(math.radians(part_of_angle_a))
-            catet_b = math.sqrt(gepotinuza ** 2 - 150 ** 2)
-            wall_height_y_coord_2 = wall_height - catet_b
-            # Выставляем координаты для размеров
-            x_zero_dim_1 = 150
-            y_zero_dim_1 = 150
-            y_height_dim_2 = full_height - up_point_of_tp_3
-            y_height_wall_dim_2 = wall_height_y_coord_2
-            x_height_dim_2 = 150
-            x_width_dim_3 = x_batten_2
-            # Cчитаем площадь полотна
-            area_square = (y_height_wall_dim_2 - 150) * (x_width_dim_3 - 150)
-            area_triangle = (((x_width_dim_3 - 150) * (y_height_dim_2 - y_height_wall_dim_2 - 300)) / 2)
-            full_area_tp_3 = round(((area_square + area_triangle) / 1000000), 2)
-            # Cчитаем площадь нащельника
-            full_area_batten = (size_of_batten_2g_height * (x_width_dim_3 - 150)) / 1000000
+            p_razmer_first = first_point - size_of_batten_2g_height - 500
+            p_razmer_second = scond_point - size_of_batten_2g_height - 500
+            p_razmer_w = self.APoint(p_razmer_first, p_razmer_second)
+            acadModel.AddDimAligned(f_point, s_point, p_razmer_w)
 
-            def make_dimension_height(first_point, scond_point, third_point, forth_point, otstup):
-                # Размер по длине
-                f_point = self.APoint(first_point, scond_point)
-                s_point = self.APoint(third_point, forth_point)
-                p_razmer_first = first_point - otstup
-                p_razmer_second = forth_point - 100.0
-                p_razmer_l = self.APoint(p_razmer_first, p_razmer_second)
-                acadModel.AddDimAligned(f_point, s_point, p_razmer_l)
-
-            def make_dimension_width(first_point, scond_point, third_point, forth_point):
-                # Размер по ширине
-                f_point = self.APoint(first_point, scond_point)
-                s_point = self.APoint(third_point, forth_point)
-                size_of_batten_2g_height = self.batten_2g_height_doubleSpinBox_3.value()
-                p_razmer_first = first_point - size_of_batten_2g_height - 500
-                p_razmer_second = scond_point - size_of_batten_2g_height - 500
-                p_razmer_w = self.APoint(p_razmer_first, p_razmer_second)
-                acadModel.AddDimAligned(f_point, s_point, p_razmer_w)
-
-            # Назначаем точки для конструкции
-            # Чертим Торец ангара по размерам заданным
-            # Точки торца ангара
-            points_wall_end = self.aDouble(
-                [p_x_1, p_y_1, p_x_1, p_y_2, p_x_2, p_y_3, p_x_3, p_y_2, p_x_3, p_y_1, p_x_1, p_y_1])
-            # Чертим торец ангара с помощью полилинии
-            well_end_drawing = acadModel.AddLightWeightPolyline(points_wall_end)
-            # Добавляем информацию о полотне в списки
-            data_for_spec['ТП-3'] = [1, x_batten_2 - 150, y_height_dim_2 - 150, full_area_tp_3]
-            # Смещаем полилинию
-            well_end_drawing.Offset(150)
-            # Контур Второго слоя
-            well_end_drawing.Offset(250)
-            well_end_drawing.Delete()
-            # Назначаем точки для конструкции
-            # Точки нащельника
-            points_batten = self.aDouble(
-                [x_batten_1, y_batten_1, x_batten_2, y_batten_1, x_batten_2, y_batten_2, x_batten_1, y_batten_2,
-                 x_batten_1,
-                 y_batten_1])
-            # Чертим нащельник c помощью полилинии
-            acadModel.AddLightWeightPolyline(points_batten)
-            # Добавляем информацию о нащельнике в списки
-            data_for_spec['Н-3-1'] = [1, x_batten_2 - 150, size_of_batten_2g_height]
-            # Считаем количетсво вторых слоев
-            # Средняя линия точки
-            print(with_end_face, full_height)
-            align_line_1 = self.APoint(with_end_face / 2, 0)
-            align_line_2 = self.APoint(with_end_face / 2, full_height)
-            step_of_sl = self.step_bw_sl_doubleSpinBox.value()
-            if self.secondlayout_checkBox.isChecked():
-                quantity_of_sl = math.ceil(
-                    (with_end_face / 2 - self.size_to_sl_doubleSpinBox.value()) / step_of_sl)
-                print(quantity_of_sl)
-                count_sl = 1
-                if quantity_of_sl != 0:
-                    for sl in range(quantity_of_sl):
-                        # Точки второго слоя
-                        points_sl = self.aDouble(
-                            [x_slayout_1, y_slayout_1, x_slayout_1, y_slayout_2, x_slayout_2, y_slayout_2, x_slayout_2,
-                             y_slayout_1])
-                        # Чертим второй слой с помощью полилинии acadModel.AddLightWeightPolyline(points_wall_end)
-                        secondl_drawing = acadModel.AddLightWeightPolyline(points_sl)
-                        print(secondl_drawing, align_line_1, align_line_2)
-                        secondl_drawing.Mirror(align_line_1, align_line_2)
-                        x_slayout_1 += step_of_sl
-                        x_slayout_2 += step_of_sl
-                        # Добавляем инфу в словарь о полуфабрикате
-                        data_for_spec[f'В-3-{count_sl}'] = [2, 100, y_slayout_2]
-                        count_sl += 1
-                else:
+        # Назначаем точки для конструкции
+        # Чертим Торец ангара по размерам заданным
+        # Точки торца ангара
+        points_wall_end = self.aDouble(
+            [p_x_1, p_y_1, p_x_1, p_y_2, p_x_2, p_y_3, p_x_3, p_y_2, p_x_3, p_y_1, p_x_1, p_y_1])
+        # Чертим торец ангара с помощью полилинии
+        well_end_drawing = acadModel.AddLightWeightPolyline(points_wall_end)
+        # Добавляем информацию о полотне в списки
+        data_for_spec['ТП-3'] = [1, x_batten_2 - 150, y_height_dim_2 - 150, full_area_tp_3]
+        # Смещаем полилинию
+        well_end_drawing.Offset(150)
+        # Контур Второго слоя
+        well_end_drawing.Offset(250)
+        well_end_drawing.Delete()
+        # Назначаем точки для конструкции
+        # Точки нащельника
+        points_batten = self.aDouble(
+            [x_batten_1, y_batten_1, x_batten_2, y_batten_1, x_batten_2, y_batten_2, x_batten_1, y_batten_2,
+             x_batten_1,
+             y_batten_1])
+        # Чертим нащельник c помощью полилинии
+        acadModel.AddLightWeightPolyline(points_batten)
+        # Добавляем информацию о нащельнике в списки
+        data_for_spec['Н-3-1'] = [1, x_batten_2 - 150, size_of_batten_2g_height]
+        # Считаем количетсво вторых слоев
+        # Средняя линия точки
+        align_line_1 = self.APoint(with_end_face / 2, 0)
+        align_line_2 = self.APoint(with_end_face / 2, full_height)
+        step_of_sl = self.step_bw_sl_doubleSpinBox.value()
+        if self.secondlayout_checkBox.isChecked():
+            quantity_of_sl = math.ceil(
+                (with_end_face / 2 - self.size_to_sl_doubleSpinBox.value()) / step_of_sl)
+            count_sl = 1
+            if quantity_of_sl != 0:
+                for sl in range(quantity_of_sl):
+                    # Точки второго слоя
                     points_sl = self.aDouble(
                         [x_slayout_1, y_slayout_1, x_slayout_1, y_slayout_2, x_slayout_2, y_slayout_2, x_slayout_2,
                          y_slayout_1])
-                    # Чертим второй слой с помощью полилинии
+                    # Чертим второй слой с помощью полилинии acadModel.AddLightWeightPolyline(points_wall_end)
                     secondl_drawing = acadModel.AddLightWeightPolyline(points_sl)
                     secondl_drawing.Mirror(align_line_1, align_line_2)
+                    x_slayout_1 += step_of_sl
+                    x_slayout_2 += step_of_sl
+                    # Добавляем инфу в словарь о полуфабрикате
                     data_for_spec[f'В-3-{count_sl}'] = [2, 100, y_slayout_2]
-            if self.pocket_checkBox.isChecked():
-                # Координаты для кармана КМ
-                x_pocket_1 = with_end_face / 2 - ((with_end_face / 2) / 3) * 2 + 400
-                y_pocket_1 = ((full_height - wall_height) / 4) + wall_height
-                x_pocket_2 = with_end_face - x_pocket_1
-                y_pocket_2 = y_pocket_1 + 150
-                # Точки кармана
-                points_pocket = self.aDouble(
-                    [x_pocket_1, y_pocket_1, x_pocket_1, y_pocket_2, x_pocket_2, y_pocket_2, x_pocket_2, y_pocket_1,
-                     x_pocket_1, y_pocket_1])
-                acadModel.AddLightWeightPolyline(points_pocket)
-                # Cчитаем площадь кармана
-                full_area_pocket = (x_pocket_2 - x_pocket_1) * 150 / 1000000
-                data_for_spec[f'КМ-3-1'] = [1, x_pocket_2 - x_pocket_1, 150]
-            self.main_data_for_spec[f'ТП-3'] = [data_for_spec]
-            # Cтавим размер полотна по высоте
-            make_dimension_height(x_zero_dim_1, y_zero_dim_1, x_height_dim_2, y_height_dim_2, 1500)
-            # Cтавим размер высоты стенки полотна
-            make_dimension_height(x_zero_dim_1, y_zero_dim_1, x_height_dim_2, y_height_wall_dim_2, 500)
-            # Cтавим размер по ширине стенки
-            make_dimension_width(x_zero_dim_1, y_zero_dim_1, x_width_dim_3, y_zero_dim_1)
-            quantity_of_tp3 = self.quantity_spinBox_tp_3.value()
-            self.print_specification(quantity_of_tp3)
-        except _ctypes.COMError:
-            error = 'Ошибка. Автокад не запущен. Запустите автокад с чертежным видом и попробуйте снова.'
-            self.MainWindow = ErrorAddReport(error)
-            self.MainWindow.show()
+                    count_sl += 1
+            else:
+                points_sl = self.aDouble(
+                    [x_slayout_1, y_slayout_1, x_slayout_1, y_slayout_2, x_slayout_2, y_slayout_2, x_slayout_2,
+                     y_slayout_1])
+                # Чертим второй слой с помощью полилинии
+                secondl_drawing = acadModel.AddLightWeightPolyline(points_sl)
+                secondl_drawing.Mirror(align_line_1, align_line_2)
+                data_for_spec[f'В-3-{count_sl}'] = [2, 100, y_slayout_2]
+        if self.pocket_checkBox.isChecked():
+            # Координаты для кармана КМ
+            x_pocket_1 = with_end_face / 2 - ((with_end_face / 2) / 3) * 2 + 400
+            y_pocket_1 = ((full_height - wall_height) / 4) + wall_height
+            x_pocket_2 = with_end_face - x_pocket_1
+            y_pocket_2 = y_pocket_1 + 150
+            # Точки кармана
+            points_pocket = self.aDouble(
+                [x_pocket_1, y_pocket_1, x_pocket_1, y_pocket_2, x_pocket_2, y_pocket_2, x_pocket_2, y_pocket_1,
+                 x_pocket_1, y_pocket_1])
+            acadModel.AddLightWeightPolyline(points_pocket)
+            # Cчитаем площадь кармана
+            full_area_pocket = (x_pocket_2 - x_pocket_1) * 150 / 1000000
+            data_for_spec[f'КМ-3-1'] = [1, x_pocket_2 - x_pocket_1, 150]
+        self.main_data_for_spec[f'ТП-3'] = [data_for_spec]
+        # Cтавим размер полотна по высоте
+        make_dimension_height(x_zero_dim_1, y_zero_dim_1, x_height_dim_2, y_height_dim_2, 1500)
+        # Cтавим размер высоты стенки полотна
+        make_dimension_height(x_zero_dim_1, y_zero_dim_1, x_height_dim_2, y_height_wall_dim_2, 500)
+        # Cтавим размер по ширине стенки
+        make_dimension_width(x_zero_dim_1, y_zero_dim_1, x_width_dim_3, y_zero_dim_1)
+        quantity_of_tp3 = self.quantity_spinBox_tp_3.value()
+        self.print_specification(quantity_of_tp3)
+
+    def find_value_in_right_triangle(self, k_further, k_close, type_of_value):
+        # Находим значения прямоугольного треугольника
+        # k_further - Дальний катит, k_close - Ближайший катет триугольника
+        if type_of_value == "Угол":
+            angle = math.atan(k_further / k_close)  # радианы
+            return angle
+        elif type_of_value == "Гипотинуза":
+            gip = math.sqrt((k_further ** 2) + (k_close ** 2))
+            return gip
+        else:
+            return None
+
+    def translate_radians_to_angle_and_back(self, value, type_of_value):
+        # Перевод значения в радианы и градусы
+        if type_of_value == "Радианы":
+            angle = math.radians(value)
+        elif type_of_value == "Градусы":
+            angle = math.degrees(value)
+        else:
+            angle = 0
+        return angle
+
+    def draw_arc_tp3_btn(self):
+        acad = win32com.client.Dispatch("AutoCAD.Application")
+        acad.Visible = True
+        acadModel = acad.ActiveDocument.ModelSpace
+        data_for_spec = {}  # Словарь зависимость полуфабрикат - его данные(кол-во, ширина, длинна)
+        # Секции дуги кол-во
+        qaunt_of_arcs = self.quantity_arc_spinBox.value()
+        # Изначальные данные, 300 - это отсуп от самой конструкции (по 150 на сторону)
+        # Ширина торца ангара
+        with_end_face = self.width_doubleSpinBox_4.value() - 300
+        # Высота стенки ангара
+        wall_height = self.wall_haight_doubleSpinBox_2.value() - 160
+        # Полная высота ангара КОНЬКА
+        full_height = self.full_height_doubleSpinBox_3.value() - 300
+        # Высота нащельника  горизонального
+        size_of_batten_2g_height = self.batten_2g_height_doubleSpinBox_3.value()
+
+        # Размер раскроя
+        cutting_size = self.count_doubleSpinBox_2.value()
+        p_1_xy = 0.0
+        p_2_y = wall_height
+        p_3_x = with_end_face
+        p_max_height = full_height
+        # Точки торца ангара
+        points_main_squad = self.aDouble(
+            [p_1_xy, p_1_xy,
+             p_1_xy, p_2_y,
+             p_3_x, p_2_y,
+             p_3_x, p_1_xy,
+             p_1_xy, p_1_xy])
+        # Чертим торец ангара с помощью полилинии
+        points_main_squad = acadModel.AddLightWeightPolyline(points_main_squad)
+        # Точки нащельника
+        p_btn_x_1 = 0.0
+        p_btn_y_1 = 150 - size_of_batten_2g_height
+        p_btn_x_2 = with_end_face
+        p_btn_y_2 = 150
+        # Точки нащельников
+        points_butten = self.aDouble(
+            [p_btn_x_1, p_btn_y_1,
+             p_btn_x_1, p_btn_y_2,
+             p_btn_x_2, p_btn_y_2,
+             p_btn_x_2, p_btn_y_1,
+             p_btn_x_1, p_btn_y_1])
+        # Чертим нащельник нижний
+        points_of_buttn = acadModel.AddLightWeightPolyline(points_butten)
+        # Найдем длинну дуги
+        radius_of_arc = ((with_end_face / 2) ** 2 + (full_height - wall_height) ** 2) / \
+                        ((full_height - wall_height) * 2)
+        p_central_of_arck_x = with_end_face / 2
+        p_central_of_arck_y = full_height - radius_of_arc
+        # Находим хорду малую связанную между высотой дуги от главной хорды и концом дуги. Ф-ла Гюйгенса
+        horda_small = self.find_value_in_right_triangle(with_end_face / 2, full_height - wall_height, "Гипотинуза")
+        length_of_arc = (2 * horda_small + (2 * horda_small - with_end_face) / 3)  # Длинна дуги
+        # Делим дугу на части. Кол-во секций дуги определяет пользователь
+        length_of_arc_of_part = length_of_arc / qaunt_of_arcs  # Длинна одной секции дуги
+        # Находим главный угол в градусах секции (угол между конечной и начальной точкой дуги)
+        angle_of_part_arc = self.translate_radians_to_angle_and_back(length_of_arc_of_part / radius_of_arc, "Градусы")
+        # Находим первый отправной угол дуги в радианах
+        first_angle_ark = self.find_value_in_right_triangle(radius_of_arc - (full_height - wall_height),
+                                                            with_end_face / 2, "Угол")
+        # Переводим в градусы и находим след. угол в радианах
+        first_angle_ark_grad = self.translate_radians_to_angle_and_back(first_angle_ark, "Градусы")
+        save_first_angle_grad = first_angle_ark_grad
+        second_angle_ark = self.translate_radians_to_angle_and_back(first_angle_ark_grad + angle_of_part_arc, "Радианы")
+        central_point_of_arc = self.APoint(p_central_of_arck_x, p_central_of_arck_y)  # Задаем центральную точку окруж
+        list_sections_of_arcs = []  # List of objects-arcs
+        # Строим секции арки по радиусу, начальному углу и конечному углу
+        for section in range(qaunt_of_arcs):
+            if section != qaunt_of_arcs - 1:
+                sect_of_ark = acadModel.AddArc(central_point_of_arc, radius_of_arc, first_angle_ark, second_angle_ark)
+                list_sections_of_arcs.append(sect_of_ark)
+                first_angle_ark = second_angle_ark
+                first_angle_ark_grad = self.translate_radians_to_angle_and_back(first_angle_ark, "Градусы")
+                second_angle_ark = self.translate_radians_to_angle_and_back(first_angle_ark_grad + angle_of_part_arc,
+                                                                            "Радианы")
+            else:
+                second_angle_ark = self.translate_radians_to_angle_and_back(180 - save_first_angle_grad, "Радианы")
+                sect_of_ark = acadModel.AddArc(central_point_of_arc, radius_of_arc, first_angle_ark, second_angle_ark)
+                list_sections_of_arcs.append(sect_of_ark)
+        # Строим полилинию по точкам арки
+        points_of_arc_for_polyline = []
+        index = 0
+        for each_section in list_sections_of_arcs:
+            if index == 0:
+                start_point = str(each_section.StartPoint)
+                list_of_coord_sp = re.findall(r"\d+\.\d+", start_point)
+                x_sp = list_of_coord_sp[0]
+                points_of_arc_for_polyline.append(x_sp)
+                y_sp = list_of_coord_sp[1]
+                points_of_arc_for_polyline.append(y_sp)
+            endpoint = str(each_section.EndPoint)
+            list_of_coord_ep = re.findall(r"\d+\.\d+", endpoint)
+            x_ep = list_of_coord_ep[0]
+            y_ep = list_of_coord_ep[1]
+            points_of_arc_for_polyline.append(x_ep)
+            points_of_arc_for_polyline.append(y_ep)
+            index += 1
+        points_of_arc_for_polyline = self.aDouble(points_of_arc_for_polyline)
+        # Очерчиваем полилинии по арке
+        arc_polyline = acadModel.AddLightWeightPolyline(points_of_arc_for_polyline)
+        # СТРОИМ КАРМАН
+        # Точки квадратного остатка кармана
+        points_squad_pocket = self.aDouble(
+            [p_3_x - 100, p_2_y - 100,
+             p_3_x - 100, p_1_xy + 100,
+             p_1_xy + 100, p_1_xy + 100,
+             p_1_xy + 100, p_2_y - 100])
+        # Чертим карман по контуру
+        points_of_buttn = acadModel.AddLightWeightPolyline(points_squad_pocket)
+        # Радиус дуги под карман
+        radius_of_arc_for_pocket = (((with_end_face - 200) / 2) ** 2 + (full_height - wall_height) ** 2) / \
+                                   ((full_height - wall_height) * 2)
+        # Находим первый отправной угол дуги кармана в радианах
+        first_angle_ark_for_pocket = self.find_value_in_right_triangle(
+            radius_of_arc_for_pocket - ((full_height - 200) - (wall_height - 200)), (with_end_face - 200) / 2, "Угол")
+        first_angle_ark_for_pocket_gr = self.translate_radians_to_angle_and_back(first_angle_ark_for_pocket, "Градусы")
+        end_angle_ark_for_pocket = self.translate_radians_to_angle_and_back(180 - first_angle_ark_for_pocket_gr,
+                                                                            "Радианы")
+        p_central_of_arck_y = - math.sqrt(- p_central_of_arck_x ** 2 + 2 * (p_3_x - 100) * p_central_of_arck_x +
+                                          (radius_of_arc_for_pocket ** 2 - (p_3_x - 100) ** 2)) + (p_2_y - 100)
+        central_point_of_arc = self.APoint(p_central_of_arck_x, p_central_of_arck_y)  # Задаем центральную точку окруж
+        # Дуга кармана
+        acadModel.AddArc(central_point_of_arc, radius_of_arc_for_pocket,
+                         first_angle_ark_for_pocket, end_angle_ark_for_pocket)
+        # Строим раскрой по арочному
+        qaunt_of_pp = math.floor(with_end_face / cutting_size)
+        p_y_cutt_size = full_height
+        p_x_change_cut_sise = cutting_size
+        for pp in range(qaunt_of_pp):
+            points_cutt = self.aDouble(
+                [p_x_change_cut_sise, p_1_xy,
+                 p_x_change_cut_sise, p_y_cutt_size])
+            acadModel.AddLightWeightPolyline(points_cutt)
+            p_x_change_cut_sise += cutting_size
 
 
 class ErrorAddReport(QDialog):
@@ -808,7 +1021,7 @@ class ErrorAddReport(QDialog):
 
 def application():
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QIcon('images/report.png'))
+    app.setWindowIcon(QIcon('images/program_logo.png'))
     MainWindow = MainMenu()
     MainWindow.show()
     sys.exit(app.exec_())

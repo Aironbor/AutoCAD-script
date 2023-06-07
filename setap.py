@@ -20,7 +20,7 @@ SETUP_DICT = {
         ('qtguidrivers', glob(r'C:\Users\IvanW\AppData\Local\Programs\Python\Python39\Lib\site-packages\PyQt5\Qt5\bin\Qt5Gui.dll')),
         ('qtwidgetdrivers', glob(r'C:\Users\IvanW\AppData\Local\Programs\Python\Python39\Lib\site-packages\PyQt5\Qt5\bin\Qt5Widgets.dll')),
     ),
-    'windows': [{'script': 'main_awe_v0.9.py'}],
+    'windows': [{'script': 'main.py'}],
     'options': {
         'py2exe': {
             'includes': ["lxml._elementpath", "PyQt5.QtCore", "PyQt5.QtGui", "PyQt5.QtWidgets", "images_store",
@@ -33,9 +33,9 @@ if platform.system() == 'Windows':
     SETUP_DICT['windows'] = [{
         'Name': 'Ivan Metliaev',
         'product_name': 'Программа для раскроя ТП',
-        'version': '2.1',
+        'version': '3.2',
         'description': 'Программа cоздана Метляевым Иваном специально для ООО "Тентовые Конструкции"',
-        'copyright': '© 2022, ivan.metliaev.helper@gmail.com. All Rights Reserved',
+        'copyright': 'Программа для раскроя ТП',
         'script': 'main.py',
         'icon_resources': [(0, r'icones.ico')]
     }]

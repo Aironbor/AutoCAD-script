@@ -21,8 +21,6 @@ class ExcelExport:
         self.curnt_special_row_for_1w = 2  # для первого листа
         self.quantity = quantity
         self.material = material
-        print(self.type_of_tp)
-        print(self.quantity, self.material, self.report_main)
         # Получаем даты
         # Словарь номер месяца - название месяца
         locale.setlocale(locale.LC_ALL, 'ru_RU')

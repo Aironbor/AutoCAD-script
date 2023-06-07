@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>624</width>
-    <height>580</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>624</width>
-    <height>580</height>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -138,7 +138,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="../../Prodaction-record-program/images/images_store.qrc">:/logo/logo/tentlogo1.png</pixmap>
+             <pixmap resource="../images/main_image.qrc">:/logo/logo/tentlogo1.png</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -362,6 +362,11 @@ QComboBox:hover {
                <item>
                 <property name="text">
                  <string>ТП-3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ТП-3А</string>
                 </property>
                </item>
               </widget>
@@ -1414,14 +1419,26 @@ QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
             <property name="minimumSize">
              <size>
               <width>271</width>
-              <height>48</height>
+              <height>120</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>81</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">color:white;</string>
             </property>
             <layout class="QFormLayout" name="formLayout_6">
-             <item row="0" column="0">
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item row="3" column="0">
               <widget class="QLabel" name="label_9">
                <property name="minimumSize">
                 <size>
@@ -1439,11 +1456,11 @@ QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
                 <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
                </property>
                <property name="text">
-                <string>Раскрой по:</string>
+                <string>Значение раскроя:</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="3" column="1">
               <widget class="QDoubleSpinBox" name="count_doubleSpinBox_2">
                <property name="minimumSize">
                 <size>
@@ -1531,6 +1548,241 @@ QDoubleSpinBox::down-arrow:on { /* shift the arrow when popup is open */
                </property>
                <property name="value">
                 <double>1.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cutt_comboBox">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QComboBox {
+    border: 1px solid gray;
+    border-radius: 10px;
+    font: 75 14pt &quot;Times New Roman&quot;;
+	color: black;
+}
+QComboBox QAbstractItemView {
+    border: 3px solid darkgray;
+    selection-background-color:qlineargradient(spread:pad, x1:0.886, y1:0.0625, x2:1, y2:0, stop:0.869318 rgba(0, 124, 255, 237), stop:1 rgba(255, 255, 255, 255));
+	color: black;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+	color: black;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+	color: black;
+}
+
+QComboBox::down-arrow {
+    image:url(:/arrow/dop/arrow.png);
+	height: 18;
+	width: 18;
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox:editable {
+    background: white;
+	color: black;
+	}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+}
+
+/* QComboBox gets the &quot;on&quot; state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+QComboBox QAbstractItemView::item:hover {
+    color: black;
+    background-color: lightgreen;   /*  The whole drop-down window crosss the background color of each item */
+}
+
+/*  After dropping, the entire drop-down window is selected for each pattern. */
+QComboBox QAbstractItemView::item:selected {
+   	color: black;
+    background-color: lightgreen;
+}
+QComboBox:hover {
+    background:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(209, 248, 255, 255), stop:1 rgba(234, 255, 255, 255));
+	color: black;
+}</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>3010</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>2510</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Другой</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Раскрой по</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="quantity_arc_spinBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Кол-во сегментов арки</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QSpinBox{
+    background-color:white;
+	border : 1px solid;
+	border-color:rgb(148, 205, 255);
+    border-radius: 10%;
+	color:black;
+	font: 14pt &quot;Times New Roman&quot;;
+ }
+
+QSpinBox:focus{
+	border : 1px solid;
+     border-color:rgb(137, 198, 255);
+	 color:black;
+ }
+QSpinBox::up-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position: top right; /* position at the top right corner */
+
+}
+QSpinBox::up-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+
+QSpinBox::up-arrow{
+	border-image:url(:/other/dop/Navigate-up-icon.png);
+	height: 12;
+	width: 12;
+}
+QSpinBox::up-arrow:on { /* shift the arrow when popup is open */
+	border: 1 px solid;
+     border-width: 0;
+     border-top-width: 0;
+}
+QSpinBox::down-button {
+ 	border-radius: 8%;	
+	height: 15;
+	width: 15;
+    subcontrol-position:bottom right; /* position at the top right corner */
+
+}
+QSpinBox::down-button:hover {
+	background:qlineargradient(spread:pad, x1:0, y1:0.483, x2:1, y2:0.460227, stop:0 rgba(122, 218, 99, 104), stop:1 rgba(118, 255, 128, 255));
+    border:1px solid;
+	border-radius:8%;
+	border-color:rgb(10, 255, 174);
+}
+QSpinBox::down-arrow {
+	border-image:url(:/other/dop/Navigate-down-icon.png);
+	height: 12;
+	width: 12;
+     border-width: 0;
+     border-top-width: 0;
+}
+
+QSpinBox::down-arrow:on { /* shift the arrow when popup is open */
+	border: 0;
+     border-width: 0;
+     border-top-width: 0;
+}</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_17">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Times New Roman&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Кол-во сегментов:</string>
                </property>
               </widget>
              </item>
@@ -2058,6 +2310,7 @@ QPushButton:hover{
   </widget>
  </widget>
  <resources>
+  <include location="../images/main_image.qrc"/>
   <include location="../../Prodaction-record-program/images/images_store.qrc"/>
  </resources>
  <connections/>
